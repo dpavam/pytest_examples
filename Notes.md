@@ -104,5 +104,7 @@ Then we can use Test classes to keep test files organised.
     This is all implemented through a configuration file.: .travis.yml
     Once that is done, make sure to install travis and codecov from github marketplace. 
 
+    Alternatively, because Travis CI can be problematic, GitHub Actions is recommended.
+    For this we will follow this (tutorial)[https://docs.github.com/es/actions/quickstart]
     
 
