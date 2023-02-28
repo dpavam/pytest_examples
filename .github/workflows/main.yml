@@ -25,4 +25,4 @@ jobs:
             pip install pytest-cov
         - name: Run tests and generate coverage report
           run: |
-            pytest --cov-report html --cov=my_package tests/
+            pytest --cov-report html --cov=src tests/
