@@ -1,0 +1,20 @@
+# Set language
+language: python
+
+# Set version
+python:
+  - "3.8"
+# Install project and dependencies in the CI server
+
+install:
+  -pip install -e .
+  - pip install pytest-cov codecov   # Install packages for code coverage report
+
+# Command to run tests
+script:
+  #- pytest tests   # keep line for travis.ci only. if using codecov use below
+  - pytest --cov=src tests     # Point to the source directory
+
+
+after_success:
+  - codecov     # Makes travis CI push the code coverage results to codecov after every build
