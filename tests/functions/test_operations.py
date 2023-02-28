@@ -3,7 +3,8 @@ from functions.operations import suma, double, say_hi
 
 # Using test classes, one per function
 
-# Test class for suma, note cammel case, begins with word Test, pass object as arg, pass self to each test.
+# Test class for suma, note cammel case, begins with word Test,
+# pass object as arg, pass self to each test.
 
 
 class TestSuma(object):
@@ -19,14 +20,15 @@ class TestSuma(object):
         # Error message for adding.
         message_add = f'The suma(4,5) returned {actual} instead of {expected}.'
         # Error message for type
-        message_type = f"The type for suma(4,5) returned {type(actual)} instead of int or float."
+        message_type = f"The type for suma(4,5) returned \
+                        {type(actual)} instead of int or float."
         # Perform the test, if it fails, the message is displayed
         # Test the function adds correctly.
         assert actual == expected, message_add
         # Test the result is numerical.
         assert isinstance(actual, (int, float)), message_type
 
-    # Example of using the pytest.approx method. Applies on other data structures.
+    # Example of using the pytest.approx method.
     # Test that the function can add floats
     # Tests a normal argument
     def test_suma_floats(self):
@@ -40,9 +42,9 @@ class TestSuma(object):
     # Tests a bad argument
     def test_suma_string_in_input(self):
         # The test passes if there is a type error
-        with pytest.raises(TypeError) as exc_info:
+        with pytest.raises(TypeError):
             suma("4"+5)
-        # Matching the error message is also an option (this one does not work...)
+        # Matching the error message is also an option using as exc_info.
         # assert exc_info.match('can only concatenate str (not "int") to str')
 
 # Test class for double
