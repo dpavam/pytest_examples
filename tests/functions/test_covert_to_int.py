@@ -1,8 +1,9 @@
-import pytest
+# import pytest
 from functions.convert_to_int import convert_to_int
 # Implementing TDD
 
-# Write the tests for a function that takes a number as a string, using commas to separate thousands and returns an integer
+# Write the tests for a function that takes a number as a string, using commas
+# to separate thousands and returns an integer
 
 # Normal arugments:
 # Try using 3 different cases, no comma, 1 comma, 2 commas
