@@ -7,7 +7,7 @@ python:
 # Install project and dependencies in the CI server
 
 install:
-  -pip install -e .
+  - pip install -e .
   - pip install pytest-cov codecov   # Install packages for code coverage report
 
 # Command to run tests
