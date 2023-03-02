@@ -106,5 +106,63 @@ Then we can use Test classes to keep test files organised.
 
     Alternatively, because Travis CI can be problematic, GitHub Actions is recommended.
     For this we will follow this (tutorial)[https://docs.github.com/es/actions/quickstart]
+
+7. More advanced tests: Beyond assert
+
+    Sometimes we will need to write tests that require a setup (e.g.:an existing file)
+    For this we use pytests' fixtures. 
+
+    They require creating an independent function, create the fixture, yield its value, and then a teardown (this is clearing the environment)
+    There are two ways to work with these:
+
+    1. Manually:
     
+    `
+    #Fixture decorator
+    @pytest.fixture
+    #define the fixture
+    def a_fixture():
+    #setup the value
+    array = np.array([[0,2],[1,4]])
+    #yield its contents
+    yield array
+    #teardown after being called
+    os.remove(array)`
+
+    2. tmpdir to automatically teardown for files.
+    `@pytest.fixture
+    def a_fixture(tmpdir):
+    file= tmpdir.join("file.txt")
+    open(file, "w").close()
+    yield file`
+
+
+8. Mocking
+    Used to tailor test that skip dependencies.
+    Packages: 1. pytest-mock (pip install pytest-mock)
+              2. unittest.mock (standard python)
+
+    This is highly specific to each test, so this will be skipped in this tutorial. 
+
+9. Testing models
+    Testing ML models can be complex, as the results are difficult. 
+    Some approaches to test include:
+        1. Sanity checks: Check the model returns a slope > 0
+        2. Test with known output. Test your modeling functions using special test data for which you know the output. This checks if they are performing as expected.
+
+10. Testing plots
+
+    This is suggested for matplotlib figures using a package called pytest-mpl (`pip install pytest-mpl`)
+    It prodouces a baseline visualisation in PNG with ideal data.
+    Then, a test can be written to produce a PNG plot, and compare them.
+    The tests have the marker: `@pytest.mark.mpl_image_compare` and return the plot. Not an assert statement.
+    The baseline is created running the command `pytest -k "<TestforPlot>" --mpl-generate-path visualisation/baseline`. This is accounting for having a visualisation/baseline dir within tests.
+    Next, the PNG is created on the baseline dir, and then to actuall test we run: `pytest -k "<TestforPlot>" --mpl`
+
+    Note the PNG images will be saved on the basline folder, where you can visually see the differences. Black is identical, white is difference. 
+
+
+All code for basing this tutorial is (here)[https://github.com/gutfeeling/univariate-linear-regression]
+
+
 
